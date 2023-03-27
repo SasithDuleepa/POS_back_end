@@ -1,9 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose')
+var bodyParser = require('body-parser')
 const router = express.Router();
 const Newuser = require("../model/usermodel")
 
-
+router.use(bodyParser.json())
 
 router.post('',async(req,res)=>{
     var newuser = Newuser({
@@ -15,6 +16,11 @@ router.post('',async(req,res)=>{
         password:req.body.password
 
     })
+    const save =await newuser.save()
+    res.send(save)
+   
+  
+    
 
 })
 module.exports = router;
